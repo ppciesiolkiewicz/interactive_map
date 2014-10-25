@@ -11,6 +11,36 @@
 
     <modules>
         <module>Interactive Map Service</module>
+        <module>Intractive Map Interface</module>
     </modules>
-    
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.2</version>
+                    <configuration>
+                        <source>1.6</source>
+                        <target>1.6</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-jaxrs</artifactId>
+                <version>3.0.9.Final</version>
+            </dependency>
+            <dependency>
+                <groupId>pl.edu.wroc.pwr</groupId>
+                <artifactId>InteractiveMapInterface</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
