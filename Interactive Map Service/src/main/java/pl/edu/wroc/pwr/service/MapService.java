@@ -1,4 +1,6 @@
-package pl.edu.wroc.pwr.service.endpoint;
+package pl.edu.wroc.pwr.service;
+
+import pl.edu.wroc.pwr.service.endpoint.PlacesService;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

@@ -1,4 +1,4 @@
-package pl.edu.wroc.pwr.model.to;
+package pl.edu.wroc.pwr.model.to.place;
 
 import pl.edu.wroc.pwr.model.util.Coordinates;
 
