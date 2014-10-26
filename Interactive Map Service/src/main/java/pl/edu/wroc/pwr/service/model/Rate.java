@@ -5,7 +5,7 @@ package pl.edu.wroc.pwr.service.model;
  */
 public class Rate {
 
-	private String id;
+	private String id = "testRateId";
 	private Integer rate;
 	private Long ownerId;
 	private String targetId;
