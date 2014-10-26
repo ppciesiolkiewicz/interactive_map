@@ -38,5 +38,10 @@
             <groupId>pl.edu.wroc.pwr</groupId>
             <artifactId>InteractiveMapInterface</artifactId>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>

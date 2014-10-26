@@ -6,14 +6,14 @@ package pl.edu.wroc.pwr.service.model;
 public class Rate {
 
 	private String id;
-	private Long rate;
-	private String ownerId;
+	private Integer rate;
+	private Long ownerId;
 	private String targetId;
 
 	public Rate() {
 	}
 
-	public Rate(Long rate, String ownerId, String targetId) {
+	public Rate(Integer rate, Long ownerId, String targetId) {
 		this.rate = rate;
 		this.ownerId = ownerId;
 		this.targetId = targetId;
@@ -27,19 +27,19 @@ public class Rate {
 		this.id = id;
 	}
 
-	public Long getRate() {
+	public Integer getRate() {
 		return rate;
 	}
 
-	public void setRate(Long rate) {
+	public void setRate(Integer rate) {
 		this.rate = rate;
 	}
 
-	public String getOwnerId() {
+	public Long getOwnerId() {
 		return ownerId;
 	}
 
-	public void setOwnerId(String ownerId) {
+	public void setOwnerId(Long ownerId) {
 		this.ownerId = ownerId;
 	}
 
