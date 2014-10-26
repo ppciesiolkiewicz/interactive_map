@@ -10,8 +10,8 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>Interactive Map Interface</module>
         <module>Interactive Map Service</module>
-        <module>Intractive Map Interface</module>
     </modules>
     <build>
         <pluginManagement>
