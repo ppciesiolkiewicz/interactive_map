@@ -7,6 +7,7 @@ import pl.edu.wroc.pwr.service.manager.PlacesManager;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Set;
 
 /**
  * Created by krzaczek on 24.10.14.
@@ -36,6 +37,14 @@ public class PlacesService {
 	public Response getPlace(@PathParam("id") String id) {
 		return Response.status(Response.Status.OK).entity(placesManager.get(id)).type(MediaType.APPLICATION_JSON)
 			.build();
+	}
+
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/filtered")
+	public Response createPlace(Set<String> tags) {
+		return Response.status(Response.Status.OK).entity(placesManager.getFiltered(tags)).type(
+			MediaType.APPLICATION_JSON).build();
 	}
 
 	@PUT

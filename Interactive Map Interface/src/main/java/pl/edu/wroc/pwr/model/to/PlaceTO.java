@@ -2,6 +2,8 @@ package pl.edu.wroc.pwr.model.to;
 
 import pl.edu.wroc.pwr.model.util.Coordinates;
 
+import java.util.Set;
+
 /**
  * Created by krzaczek on 26.10.14.
  */
@@ -12,8 +14,8 @@ public class PlaceTO extends  PlaceCreationTO {
 	public PlaceTO() {}
 
 	public PlaceTO(Coordinates coordinates, String name, String description,
-		Long ownerId, String id) {
-		super(coordinates, name, description, ownerId);
+		Long ownerId, String id, Set<String> tags) {
+		super(coordinates, name, description, ownerId, tags);
 		this.id = id;
 	}
 
