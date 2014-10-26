@@ -1,6 +1,5 @@
 package pl.edu.wroc.pwr.service.manager;
 
-
 import pl.edu.wroc.pwr.model.to.place.PlaceCreationTO;
 import pl.edu.wroc.pwr.model.to.place.PlaceTO;
 import pl.edu.wroc.pwr.service.model.Place;
@@ -27,25 +26,24 @@ public class PlacesManager {
 				return place;
 			}
 		}
-		throw new NullPointerException();
+		return null;
 	}
 
-	public void remove(String id, Long ownerId) {
+	public String remove(String id, Long ownerId) {
 		for (Place place : places) {
 			if (place.getId().equals(id)) {
 				if (ownerId.equals(place.getOwnerId())) {
 					places.remove(place);
-					return;
+					return place.getId();
 				}
 			}
 		}
-		throw new NullPointerException();
+		return null;
 	}
 
 	public void update(PlaceTO placeTO, Long ownerId) {
 		Place place = createPlaceFromTO(placeTO);
 	}
-
 
 	public String create(PlaceCreationTO placeTO) {
 		Place place = createPlaceFromCreationTO(placeTO);
@@ -53,11 +51,10 @@ public class PlacesManager {
 		return place.getId();
 	}
 
-
 	private Place createPlaceFromTO(PlaceTO placeTO) {
 		Place placeFromCreationTO = createPlaceFromCreationTO(placeTO);
 		placeFromCreationTO.setId(placeTO.getId());
-		return  placeFromCreationTO;
+		return placeFromCreationTO;
 	}
 
 	private Place createPlaceFromCreationTO(PlaceCreationTO placeTO) {
@@ -73,16 +70,16 @@ public class PlacesManager {
 	public List getFiltered(Set<String> tags) {
 		List<Place> filteredPlaces = new LinkedList<Place>();
 		for (Place place : places) {
-			if(containsTag(place, tags)) {
+			if (containsTag(place, tags)) {
 				filteredPlaces.add(place);
 			}
 		}
-		return  filteredPlaces;
+		return filteredPlaces;
 	}
 
 	private boolean containsTag(Place place, Set<String> tags) {
-		for(String tag : place.getTags()) {
-			if(tags.contains(tag)) {
+		for (String tag : place.getTags()) {
+			if (tags.contains(tag)) {
 				return true;
 			}
 		}

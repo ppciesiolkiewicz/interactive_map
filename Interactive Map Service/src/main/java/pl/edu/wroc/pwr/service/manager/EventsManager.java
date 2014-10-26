@@ -3,7 +3,6 @@ package pl.edu.wroc.pwr.service.manager;
 import pl.edu.wroc.pwr.model.to.event.EventCreationTO;
 import pl.edu.wroc.pwr.model.to.event.EventTO;
 import pl.edu.wroc.pwr.service.model.Event;
-import pl.edu.wroc.pwr.service.model.Place;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -27,25 +26,25 @@ public class EventsManager {
 				return event;
 			}
 		}
-		throw new NullPointerException();
+	return  null;
 	}
 
-	public void remove(String id, Long ownerId) {
+	public String remove(String id, Long ownerId) {
 		for (Event event : events) {
 			if (event.getId().equals(id)) {
 				if (ownerId.equals(event.getOwnerId())) {
 					events.remove(event);
-					return;
+					return event.getId();
 				}
 			}
 		}
-		throw new NullPointerException();
+	return null;
 	}
+
 
 	public void update(EventTO eventTO, Long ownerId) {
 		Event event = createEventFromTO(eventTO);
 	}
-
 
 	public String create(EventCreationTO eventTO) {
 		Event event = createEventFromCreationTO(eventTO);
@@ -53,11 +52,10 @@ public class EventsManager {
 		return event.getId();
 	}
 
-
 	private Event createEventFromTO(EventTO eventTO) {
 		Event eventFromCreationTO = createEventFromCreationTO(eventTO);
 		eventFromCreationTO.setId(eventTO.getId());
-		return  eventFromCreationTO;
+		return eventFromCreationTO;
 	}
 
 	private Event createEventFromCreationTO(EventCreationTO eventTO) {
@@ -73,16 +71,16 @@ public class EventsManager {
 	public List getFiltered(Set<String> tags) {
 		List<Event> filteredPlaces = new LinkedList<Event>();
 		for (Event event : events) {
-			if(containsTag(event, tags)) {
+			if (containsTag(event, tags)) {
 				filteredPlaces.add(event);
 			}
 		}
-		return  filteredPlaces;
+		return filteredPlaces;
 	}
 
 	private boolean containsTag(Event event, Set<String> tags) {
-		for(String tag : event.getTags()) {
-			if(tags.contains(tag)) {
+		for (String tag : event.getTags()) {
+			if (tags.contains(tag)) {
 				return true;
 			}
 		}

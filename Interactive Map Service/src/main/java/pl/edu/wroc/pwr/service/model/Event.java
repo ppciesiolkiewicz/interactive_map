@@ -10,8 +10,8 @@ public class Event implements Serializable {
 
 	private String id = "testEventId";
 	private String placeId;
-	private String name = "";
-	private String description = "";
+	private String name;
+	private String description;
 	private Long ownerId;
 	private Set<String> tags;
 

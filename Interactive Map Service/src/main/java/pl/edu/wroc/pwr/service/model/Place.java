@@ -10,10 +10,10 @@ import java.util.Set;
  */
 public class Place implements Serializable {
 
-	private String id = "testId";
+	private String id = "testPlaceId";
 	private Coordinates coordinates;
-	private String name = "";
-	private String description = "";
+	private String name;
+	private String description;
 	private Long ownerId;
 	private Set<String> tags;
 
