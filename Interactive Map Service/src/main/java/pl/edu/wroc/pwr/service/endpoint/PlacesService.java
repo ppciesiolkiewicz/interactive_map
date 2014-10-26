@@ -1,6 +1,7 @@
 package pl.edu.wroc.pwr.service.endpoint;
 
-import pl.edu.wroc.pwr.model.Place;
+import pl.edu.wroc.pwr.model.to.PlaceCreationTO;
+import pl.edu.wroc.pwr.model.to.PlaceTO;
 import pl.edu.wroc.pwr.service.manager.PlacesManager;
 
 import javax.ws.rs.*;
@@ -25,7 +26,7 @@ public class PlacesService {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/")
-	public Response createPlace(Place place) {
+	public Response createPlace(PlaceCreationTO place) {
 		return Response.status(Response.Status.OK).entity(placesManager.create(place)).type(
 			MediaType.APPLICATION_JSON).build();
 	}
@@ -40,13 +41,12 @@ public class PlacesService {
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/")
-	public Response updatePlace(@QueryParam("ownerId") Long ownerId, Place place) {
+	public Response updatePlace(@QueryParam("ownerId") Long ownerId, PlaceTO place) {
 		placesManager.update(place, ownerId);
 		return Response.status(Response.Status.OK).type(MediaType.APPLICATION_JSON).build();
 	}
 
 	@DELETE
-	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/{id}/{ownerId}")
 	public Response removePlace(@PathParam("id") String id, @PathParam("ownerId") Long ownerId) {
 		placesManager.remove(id, ownerId);

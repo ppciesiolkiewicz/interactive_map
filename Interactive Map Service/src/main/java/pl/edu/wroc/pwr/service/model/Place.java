@@ -29,6 +29,10 @@ public class Place implements Serializable {
 		return id;
 	}
 
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public Coordinates getCoordinates() {
 		return coordinates;
 	}

@@ -1,6 +1,9 @@
 package pl.edu.wroc.pwr.service.manager;
 
-import pl.edu.wroc.pwr.model.Place;
+
+import pl.edu.wroc.pwr.model.to.PlaceCreationTO;
+import pl.edu.wroc.pwr.model.to.PlaceTO;
+import pl.edu.wroc.pwr.service.model.Place;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,12 +40,31 @@ public class PlacesManager {
 		throw new NullPointerException();
 	}
 
-	public void update(Place place, Long ownerId) {
-
+	public void update(PlaceTO placeTO, Long ownerId) {
+		Place place = createPlaceFromTO(placeTO);
 	}
 
-	public String create(Place place) {
+
+	public String create(PlaceCreationTO placeTO) {
+		Place place = createPlaceFromCreationTO(placeTO);
 		places.add(place);
 		return place.getId();
 	}
+
+
+	private Place createPlaceFromTO(PlaceTO placeTO) {
+		Place placeFromCreationTO = createPlaceFromCreationTO(placeTO);
+		placeFromCreationTO.setId(placeTO.getId());
+		return  placeFromCreationTO;
+	}
+
+	private Place createPlaceFromCreationTO(PlaceCreationTO placeTO) {
+		Place place = new Place();
+		place.setCoordinates(placeTO.getCoordinates());
+		place.setDescription(placeTO.getDescription());
+		place.setName(placeTO.getName());
+		place.setOwnerId(placeTO.getOwnerId());
+		return place;
+	}
+
 }
