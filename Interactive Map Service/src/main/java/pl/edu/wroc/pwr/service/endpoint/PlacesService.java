@@ -1,7 +1,7 @@
 package pl.edu.wroc.pwr.service.endpoint;
 
-import pl.edu.wroc.pwr.model.to.PlaceCreationTO;
-import pl.edu.wroc.pwr.model.to.PlaceTO;
+import pl.edu.wroc.pwr.model.to.place.PlaceCreationTO;
+import pl.edu.wroc.pwr.model.to.place.PlaceTO;
 import pl.edu.wroc.pwr.service.manager.PlacesManager;
 
 import javax.ws.rs.*;

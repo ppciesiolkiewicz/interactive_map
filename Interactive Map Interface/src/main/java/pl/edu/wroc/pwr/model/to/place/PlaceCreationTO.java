@@ -2,12 +2,13 @@ package pl.edu.wroc.pwr.model.to.place;
 
 import pl.edu.wroc.pwr.model.util.Coordinates;
 
+import java.io.Serializable;
 import java.util.Set;
 
 /**
  * Created by krzaczek on 26.10.14.
  */
-public class PlaceCreationTO {
+public class PlaceCreationTO implements Serializable {
 
 	private Coordinates coordinates;
 	private String name = "";

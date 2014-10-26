@@ -1,5 +1,6 @@
 package pl.edu.wroc.pwr.service;
 
+import pl.edu.wroc.pwr.service.endpoint.EventsService;
 import pl.edu.wroc.pwr.service.endpoint.PlacesService;
 
 import javax.ws.rs.ApplicationPath;
@@ -17,6 +18,7 @@ public class MapService extends Application {
 	public Set<Class<?>> getClasses() {
 		Set<Class<?>> s = new HashSet<Class<?>>();
 		s.add(PlacesService.class);
+		s.add(EventsService.class);
 		return s;
 	}
 }

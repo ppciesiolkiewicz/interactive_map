@@ -1,8 +1,8 @@
 package pl.edu.wroc.pwr.service.manager;
 
 
-import pl.edu.wroc.pwr.model.to.PlaceCreationTO;
-import pl.edu.wroc.pwr.model.to.PlaceTO;
+import pl.edu.wroc.pwr.model.to.place.PlaceCreationTO;
+import pl.edu.wroc.pwr.model.to.place.PlaceTO;
 import pl.edu.wroc.pwr.service.model.Place;
 
 import java.util.ArrayList;
@@ -70,7 +70,7 @@ public class PlacesManager {
 		return place;
 	}
 
-	public Object getFiltered(Set<String> tags) {
+	public List getFiltered(Set<String> tags) {
 		List<Place> filteredPlaces = new LinkedList<Place>();
 		for (Place place : places) {
 			if(containsTag(place, tags)) {
