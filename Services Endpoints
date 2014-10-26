@@ -1,0 +1,35 @@
+interactive_map
+===============
+
+IT app. - El. media in Business Project
+
+Place service endpoints:
+
+1. Get All Places
+
+GET
+http://[server_ip]:[port]/InteligentMapService-1.0/MapService/v1/places
+
+2. Get Place - return first place found with given Id
+
+GET
+http://[server_ip]:[port]/InteligentMapService-1.0/MapService/v1/places/testId
+
+3. Create Place - return Id of created place
+
+POST
+Consumes application/json
+http://[server_ip]:[port]/InteligentMapService-1.0/MapService/v1/places/
+Content: PlaceCreationTO 
+
+4. Remove Place - removes place if ownerId and placeId are correct
+
+DELETE
+http://[server_ip]:[port]/InteligentMapService-1.0/MapService/v1/places/{id}/{ownerId}
+
+5. Update Place - NOT SUPPORTED YET
+
+PUT
+Consumes application/json
+http://[server_ip]:[port]/InteligentMapService-1.0/MapService/v1/places/
+Content: PlaceTO 
