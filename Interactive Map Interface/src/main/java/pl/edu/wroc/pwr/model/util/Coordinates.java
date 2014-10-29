@@ -6,23 +6,23 @@ import java.io.Serializable;
  * Created by krzaczek on 25.10.14.
  */
 public class Coordinates implements Serializable {
-	Double x;
-	Double y;
+	Double longitude;
+	Double latitude;
 
 	public Coordinates() {
 
 	}
 
-	public Coordinates(Double x, Double y) {
-		this.x = x;
-		this.y = y;
+	public Coordinates(Double longitude, Double latitude) {
+		this.longitude = longitude;
+		this.latitude = latitude;
 	}
 
-	public Double getX() {
-		return x;
+	public Double getLongitude() {
+		return longitude;
 	}
 
-	public Double getY() {
-		return y;
+	public Double getLatitude() {
+		return latitude;
 	}
 }
