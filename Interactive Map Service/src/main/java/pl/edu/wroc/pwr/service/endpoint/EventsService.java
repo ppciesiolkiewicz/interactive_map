@@ -15,7 +15,7 @@ import java.util.Set;
 @Path("/events")
 public class EventsService {
 
-	private EventsManager eventsManager = new EventsManager();
+	private static EventsManager eventsManager = new EventsManager();
 
 	@GET
 	@Path("/")

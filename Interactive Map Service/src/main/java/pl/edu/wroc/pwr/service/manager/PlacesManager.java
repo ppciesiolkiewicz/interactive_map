@@ -12,34 +12,7 @@ import java.util.Set;
 /**
  * Created by krzaczek on 25.10.14.
  */
-public class PlacesManager {
-
-	private static List<Place> places = new ArrayList<Place>();
-
-	public List<Place> getAll() {
-		return places;
-	}
-
-	public Place get(String id) {
-		for (Place place : places) {
-			if (place.getId().equals(id)) {
-				return place;
-			}
-		}
-		return null;
-	}
-
-	public String remove(String id, Long ownerId) {
-		for (Place place : places) {
-			if (place.getId().equals(id)) {
-				if (ownerId.equals(place.getOwnerId())) {
-					places.remove(place);
-					return place.getId();
-				}
-			}
-		}
-		return null;
-	}
+public class PlacesManager extends  ModelManager<Place>{
 
 	public void update(PlaceTO placeTO, Long ownerId) {
 		Place place = createPlaceFromTO(placeTO);
@@ -47,7 +20,7 @@ public class PlacesManager {
 
 	public String create(PlaceCreationTO placeTO) {
 		Place place = createPlaceFromCreationTO(placeTO);
-		places.add(place);
+		models.add(place);
 		return place.getId();
 	}
 
@@ -65,25 +38,6 @@ public class PlacesManager {
 		place.setOwnerId(placeTO.getOwnerId());
 		place.setTags(placeTO.getTags());
 		return place;
-	}
-
-	public List getFiltered(Set<String> tags) {
-		List<Place> filteredPlaces = new LinkedList<Place>();
-		for (Place place : places) {
-			if (containsTag(place, tags)) {
-				filteredPlaces.add(place);
-			}
-		}
-		return filteredPlaces;
-	}
-
-	private boolean containsTag(Place place, Set<String> tags) {
-		for (String tag : place.getTags()) {
-			if (tags.contains(tag)) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 }
