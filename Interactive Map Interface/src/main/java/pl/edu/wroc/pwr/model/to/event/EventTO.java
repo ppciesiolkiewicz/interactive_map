@@ -1,5 +1,6 @@
 package pl.edu.wroc.pwr.model.to.event;
 
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -13,8 +14,8 @@ public class EventTO extends EventCreationTO {
 	}
 
 	public EventTO(String placeId, String name, String description, Long ownerId, Set<String> tags,
-		String id) {
-		super(placeId, name, description, ownerId, tags);
+		String id, Date date) {
+		super(placeId, name, description, ownerId, tags, date);
 		this.id = id;
 	}
 
