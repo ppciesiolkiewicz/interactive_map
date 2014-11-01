@@ -1,5 +1,7 @@
 package pl.edu.wroc.pwr.service.model;
 
+import org.springframework.data.annotation.Id;
+
 import java.io.Serializable;
 import java.util.Set;
 
@@ -8,6 +10,7 @@ import java.util.Set;
  */
 public abstract class Model implements Serializable {
 
+	@Id
 	private String id;
 	private String name;
 	private String description;

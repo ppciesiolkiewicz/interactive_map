@@ -1,11 +1,16 @@
 package pl.edu.wroc.pwr.service.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * Created by krzaczek on 26.10.14.
  */
+@Document(collection = "rates")
 public class Rate {
 
-	private String id = "testRateId";
+	@Id
+	private String id;
 	private Integer rate;
 	private Long ownerId;
 	private String targetId;

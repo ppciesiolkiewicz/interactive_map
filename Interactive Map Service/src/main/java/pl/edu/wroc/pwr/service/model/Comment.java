@@ -1,11 +1,16 @@
 package pl.edu.wroc.pwr.service.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * Created by krzaczek on 26.10.14.
  */
+@Document(collection = "comments")
 public class Comment {
 
-	private String id = "testCommentId";
+	@Id
+	private String id;
 	private String targetId;
 	private String comment;
 	private Long ownerId;

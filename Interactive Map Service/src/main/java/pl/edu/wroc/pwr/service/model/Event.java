@@ -1,14 +1,16 @@
 package pl.edu.wroc.pwr.service.model;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.Date;
 import java.util.Set;
 
 /**
  * Created by krzaczek on 26.10.14.
  */
+@Document(collection = "events")
 public class Event extends Model {
 
-	private String id = "testEventId";
 	private String placeId;
 	private Date date;
 
@@ -20,10 +22,6 @@ public class Event extends Model {
 	}
 
 	public Event() {
-	}
-
-	@Override public String getId() {
-		return id;
 	}
 
 	public String getPlaceId() {

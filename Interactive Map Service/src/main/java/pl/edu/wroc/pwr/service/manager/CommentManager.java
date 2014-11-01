@@ -1,10 +1,15 @@
 package pl.edu.wroc.pwr.service.manager;
 
+import com.mongodb.WriteResult;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import pl.edu.wroc.pwr.model.to.comment.CommentCreationTO;
+import pl.edu.wroc.pwr.service.db.SpringMongoConfig;
 import pl.edu.wroc.pwr.service.model.Comment;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -12,42 +17,28 @@ import java.util.List;
  */
 public class CommentManager {
 
-	private static List<Comment> comments = new ArrayList<Comment>();
+	ApplicationContext ctx =new AnnotationConfigApplicationContext(SpringMongoConfig.class);
+	MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
 
 	public Comment get(String commentId) {
-		for (Comment comment : comments) {
-			if (comment.getId().equals(commentId)) {
-				return comment;
-			}
-		}
-		return null;
+		Query searchUserQuery = new Query(Criteria.where("id").is(commentId));
+		return mongoOperation.findOne(searchUserQuery, Comment.class);
 	}
 
 	public List<Comment> getCommentsFor(String targetId) {
-		List<Comment> commentsForTarget = new LinkedList<Comment>();
-		for (Comment comment : comments) {
-			if (comment.getTargetId().equals(targetId)) {
-				commentsForTarget.add(comment);
-			}
-		}
-		return commentsForTarget;
+		Query searchUserQuery = new Query(Criteria.where("targetId").is(targetId));
+		return mongoOperation.find(searchUserQuery, Comment.class);
 	}
 
-	public String remove(String commentId, Long ownerId) {
-		for (Comment comment : comments) {
-			if (comment.getId().equals(commentId)) {
-				if (comment.getOwnerId().equals(ownerId)) {
-					comments.remove(comment);
-					return comment.getId();
-				}
-			}
-		}
-		return null;
+	public int remove(String commentId, Long ownerId) {
+		Query searchUserQuery = new Query(Criteria.where("id").is(commentId).andOperator(Criteria.where("ownerId").is(ownerId)));
+		WriteResult remove = mongoOperation.remove(searchUserQuery, Comment.class);
+		return remove.getN();
 	}
 
 	public String createComment(CommentCreationTO commentCreationTO) {
 		Comment comment = createCommentFromTO(commentCreationTO);
-		comments.add(comment);
+		mongoOperation.save(comment);
 		return comment.getId();
 	}
 
