@@ -21,8 +21,7 @@ public class CommentManager {
 	MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
 
 	public Comment get(String commentId) {
-		Query searchUserQuery = new Query(Criteria.where("id").is(commentId));
-		return mongoOperation.findOne(searchUserQuery, Comment.class);
+		return mongoOperation.findById(commentId, Comment.class);
 	}
 
 	public List<Comment> getCommentsFor(String targetId) {

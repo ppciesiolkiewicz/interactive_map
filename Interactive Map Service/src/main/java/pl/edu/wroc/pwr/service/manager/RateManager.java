@@ -1,7 +1,15 @@
 package pl.edu.wroc.pwr.service.manager;
 
+import com.mongodb.WriteResult;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import pl.edu.wroc.pwr.model.to.rating.RateCreationTO;
+import pl.edu.wroc.pwr.service.db.SpringMongoConfig;
 import pl.edu.wroc.pwr.service.manager.utils.RateCalculator;
+import pl.edu.wroc.pwr.service.model.Comment;
 import pl.edu.wroc.pwr.service.model.Rate;
 
 import java.util.ArrayList;
@@ -16,7 +24,9 @@ public class RateManager {
 	public static final int RATE_MIN = 1;
 	public static final int RATE_MAX = 5;
 
-	private static List<Rate> rates = new ArrayList<Rate>();
+	ApplicationContext ctx =new AnnotationConfigApplicationContext(SpringMongoConfig.class);
+	MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
+
 	private final RateCalculator calculator;
 
 	public RateManager() {
@@ -24,24 +34,13 @@ public class RateManager {
 	}
 
 	public Rate get(String rateId) {
-		for (Rate rate : rates) {
-			if (rate.getId().equals(rateId)) {
-				return rate;
-			}
-		}
-		return null;
+		return mongoOperation.findById(rateId, Rate.class);
 	}
 
-	public String remove(String rateId, Long ownerId) {
-		for (Rate rate : rates) {
-			if (rate.getId().equals(rateId)) {
-				if (rate.getOwnerId().equals(ownerId)) {
-					rates.remove(rate);
-					return rate.getId();
-				}
-			}
-		}
-		return null;
+	public int remove(String rateId, Long ownerId) {
+		Query searchUserQuery = new Query(Criteria.where("id").is(rateId).andOperator(Criteria.where("ownerId").is(ownerId)));
+		WriteResult remove = mongoOperation.remove(searchUserQuery, Rate.class);
+		return remove.getN();
 	}
 
 	public String createRate(RateCreationTO rateCreationTO) {
@@ -49,8 +48,18 @@ public class RateManager {
 			return null;
 		}
 		Rate rate = createRateFromTO(rateCreationTO);
-		rates.add(rate);
+		mongoOperation.save(rate);
 		return rate.getId();
+	}
+
+	public Double getAverage(String targetId) {
+		List<Integer> rateValues = new LinkedList<Integer>();
+		Query searchUserQuery = new Query(Criteria.where("targetId").is(targetId));
+		List<Rate> rates = mongoOperation.find(searchUserQuery, Rate.class);
+		for(Rate rate : rates) {
+			rateValues.add(rate.getRate());
+		}
+		return calculator.avg(rateValues);
 	}
 
 	private boolean isValid(RateCreationTO rateCreationTO) {
@@ -66,11 +75,5 @@ public class RateManager {
 		return rate;
 	}
 
-	public Double getAverage(String targetId) {
-		List<Integer> rateValues = new LinkedList<Integer>();
-		for(Rate rate : rates) {
-			rateValues.add(rate.getRate());
-		}
-		return calculator.avg(rateValues);
-	}
+
 }
