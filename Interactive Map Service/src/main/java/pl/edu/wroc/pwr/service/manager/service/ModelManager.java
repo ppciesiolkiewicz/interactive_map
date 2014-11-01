@@ -39,18 +39,9 @@ public class ModelManager<T extends Model>  extends DataManager {
 		return removed.getN();
 	}
 
-	//TODO implement
-	public Set<T> getFiltered(Set<String> tags) {
-		Set<T> filteredPlaces = new HashSet<T>();
-		//		for(String tag : tags) {
-		//			Query serachQuery = new Query(Criteria.where("tags").)
-		//			try (DBCursor cursor = mongoOperation.find(query, type)) {
-		//				while (cursor.hasNext()) {
-		//					System.out.println(cursor.next());
-		//				}
-		//			}
-		//		}
-		return filteredPlaces;
+	public List<T> getFiltered(Set<String> tags) {
+		Query searchQuery = new Query(Criteria.where("tags").in(tags));
+		return mongoOperation.find(searchQuery, type);
 	}
 
 	private boolean containsTag(T model, Set<String> tags) {
