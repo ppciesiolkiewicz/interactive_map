@@ -7,6 +7,7 @@ import pl.edu.wroc.pwr.service.manager.EventsManager;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Date;
 import java.util.Set;
 
 /**

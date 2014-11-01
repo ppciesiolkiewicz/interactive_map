@@ -32,6 +32,7 @@ public class EventsManager extends ModelManager<Event> {
 		event.setName(eventTO.getName());
 		event.setOwnerId(eventTO.getOwnerId());
 		event.setTags(eventTO.getTags());
+		event.setDate(eventTO.getDate());
 		return event;
 	}
 
