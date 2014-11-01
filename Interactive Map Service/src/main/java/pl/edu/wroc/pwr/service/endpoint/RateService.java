@@ -1,6 +1,7 @@
 package pl.edu.wroc.pwr.service.endpoint;
 
 import pl.edu.wroc.pwr.model.to.rating.RateCreationTO;
+import pl.edu.wroc.pwr.model.to.rating.RateTO;
 import pl.edu.wroc.pwr.service.manager.RateManager;
 
 import javax.ws.rs.*;
@@ -45,4 +46,13 @@ public class RateService {
 			.type(MediaType.APPLICATION_JSON)
 			.build();
 	}
+
+	@PUT
+	@Path("/")
+	public Response updateRate(@QueryParam("ownerId") Long ownerId, RateTO rateTO) {
+		return Response.status(Response.Status.OK).entity(rateManager.update(ownerId, rateTO))
+			.type(MediaType.APPLICATION_JSON)
+			.build();
+	}
+
 }

@@ -6,9 +6,12 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import pl.edu.wroc.pwr.model.to.rating.RateCreationTO;
+import pl.edu.wroc.pwr.model.to.rating.RateTO;
 import pl.edu.wroc.pwr.service.db.SpringMongoConfig;
 import pl.edu.wroc.pwr.service.manager.utils.RateCalculator;
+import pl.edu.wroc.pwr.service.model.Event;
 import pl.edu.wroc.pwr.service.model.Rate;
 
 import java.util.LinkedList;
@@ -73,6 +76,16 @@ public class RateManager {
 		rate.setTargetId(rateCreationTO.getTargetId());
 		return rate;
 	}
-	//TODO update
+
+	public int update(Long ownerId, RateTO rateTO) {
+		Query searchQuery = new Query(
+			Criteria.where("id").is(rateTO.getId()).andOperator(Criteria.where("ownerId").is(ownerId)));
+		Update update = new Update();
+		update.set("ownerId", rateTO.getOwnerId());
+		update.set("rate", rateTO.getRate());
+		update.set("targetId", rateTO.getTargetId());
+		WriteResult writeResult = mongoOperation.updateFirst(searchQuery, update, Rate.class);
+		return  writeResult.getN();
+	}
 
 }
