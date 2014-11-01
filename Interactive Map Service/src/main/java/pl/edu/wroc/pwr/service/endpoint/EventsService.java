@@ -2,7 +2,7 @@ package pl.edu.wroc.pwr.service.endpoint;
 
 import pl.edu.wroc.pwr.model.to.event.EventCreationTO;
 import pl.edu.wroc.pwr.model.to.event.EventTO;
-import pl.edu.wroc.pwr.service.manager.EventsManager;
+import pl.edu.wroc.pwr.service.manager.service.EventsManager;
 import pl.edu.wroc.pwr.service.model.Event;
 
 import javax.ws.rs.*;

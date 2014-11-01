@@ -1,7 +1,7 @@
 package pl.edu.wroc.pwr.service.endpoint;
 
 import pl.edu.wroc.pwr.model.to.comment.CommentCreationTO;
-import pl.edu.wroc.pwr.service.manager.CommentManager;
+import pl.edu.wroc.pwr.service.manager.service.CommentManager;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

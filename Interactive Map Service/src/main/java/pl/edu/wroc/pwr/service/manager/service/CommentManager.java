@@ -1,13 +1,10 @@
 package pl.edu.wroc.pwr.service.manager.service;
 
 import com.mongodb.WriteResult;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import pl.edu.wroc.pwr.model.to.comment.CommentCreationTO;
-import pl.edu.wroc.pwr.service.db.SpringMongoConfig;
+import pl.edu.wroc.pwr.service.manager.DataManager;
 import pl.edu.wroc.pwr.service.model.Comment;
 
 import java.util.List;
@@ -15,10 +12,7 @@ import java.util.List;
 /**
  * Created by krzaczek on 26.10.14.
  */
-public class CommentManager {
-
-	ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
-	MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
+public class CommentManager extends DataManager {
 
 	public Comment get(String commentId) {
 		return mongoOperation.findById(commentId, Comment.class);

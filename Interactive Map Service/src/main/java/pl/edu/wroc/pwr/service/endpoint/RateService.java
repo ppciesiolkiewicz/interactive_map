@@ -2,7 +2,7 @@ package pl.edu.wroc.pwr.service.endpoint;
 
 import pl.edu.wroc.pwr.model.to.rating.RateCreationTO;
 import pl.edu.wroc.pwr.model.to.rating.RateTO;
-import pl.edu.wroc.pwr.service.manager.RateManager;
+import pl.edu.wroc.pwr.service.manager.service.RateManager;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

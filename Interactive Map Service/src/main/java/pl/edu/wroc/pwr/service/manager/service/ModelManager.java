@@ -19,9 +19,6 @@ import java.util.Set;
  */
 public class ModelManager<T extends Model>  extends DataManager {
 
-	ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
-	MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
-
 	private final Class<T> type;
 
 	public ModelManager(Class<T> type) {

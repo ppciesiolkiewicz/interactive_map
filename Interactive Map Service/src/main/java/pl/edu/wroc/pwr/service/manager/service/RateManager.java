@@ -1,17 +1,13 @@
 package pl.edu.wroc.pwr.service.manager.service;
 
 import com.mongodb.WriteResult;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import pl.edu.wroc.pwr.model.to.rating.RateCreationTO;
 import pl.edu.wroc.pwr.model.to.rating.RateTO;
-import pl.edu.wroc.pwr.service.db.SpringMongoConfig;
-import pl.edu.wroc.pwr.service.manager.utils.RateCalculator;
-import pl.edu.wroc.pwr.service.model.Event;
+import pl.edu.wroc.pwr.service.manager.DataManager;
+import pl.edu.wroc.pwr.service.manager.service.utils.RateCalculator;
 import pl.edu.wroc.pwr.service.model.Rate;
 
 import java.util.LinkedList;
@@ -20,13 +16,10 @@ import java.util.List;
 /**
  * Created by krzaczek on 26.10.14.
  */
-public class RateManager {
+public class RateManager extends DataManager {
 
 	public static final int RATE_MIN = 1;
 	public static final int RATE_MAX = 5;
-
-	ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
-	MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
 
 	private final RateCalculator calculator;
 
@@ -85,7 +78,7 @@ public class RateManager {
 		update.set("rate", rateTO.getRate());
 		update.set("targetId", rateTO.getTargetId());
 		WriteResult writeResult = mongoOperation.updateFirst(searchQuery, update, Rate.class);
-		return  writeResult.getN();
+		return writeResult.getN();
 	}
 
 }

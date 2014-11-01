@@ -17,9 +17,6 @@ import pl.edu.wroc.pwr.service.model.Place;
  */
 public class PlacesManager extends ModelManager<Place> {
 
-	ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
-	MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
-
 	public PlacesManager(Class<Place> type) {
 		super(type);
 	}
