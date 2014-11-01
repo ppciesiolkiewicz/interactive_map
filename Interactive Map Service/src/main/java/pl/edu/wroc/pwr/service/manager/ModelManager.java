@@ -1,14 +1,15 @@
 package pl.edu.wroc.pwr.service.manager;
 
+import com.mongodb.WriteResult;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import pl.edu.wroc.pwr.service.db.SpringMongoConfig;
-import pl.edu.wroc.pwr.service.model.Event;
 import pl.edu.wroc.pwr.service.model.Model;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -17,47 +18,40 @@ import java.util.Set;
  */
 public class ModelManager<T extends Model> {
 
-
-	ApplicationContext ctx =new AnnotationConfigApplicationContext(SpringMongoConfig.class);
+	ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
 	MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
 
-	protected List<T> models = new ArrayList<T>();
+	private final Class<T> type;
 
+	public ModelManager(Class<T> type) {
+		this.type = type;
+	}
 
 	public List<T> getAll() {
-		return models;
+		return mongoOperation.findAll(type);
 	}
 
 	public T get(String id) {
-		for (T model : models) {
-			if (model.getId().equals(id)) {
-				return model;
-			}
-		}
-		return  null;
+		return mongoOperation.findById(id, type);
 	}
 
-	public String remove(String id, Long ownerId) {
-		for (T model : models) {
-			if (model.getId().equals(id)) {
-				if (ownerId.equals(model.getOwnerId())) {
-					models.remove(model);
-					return model.getId();
-				}
-			}
-		}
-		return null;
+	public int remove(String id, Long ownerId) {
+		Query searchQuery = new Query(Criteria.where("id").is(id).andOperator(Criteria.where("ownerId").is(ownerId)));
+		WriteResult removed = mongoOperation.remove(searchQuery, type);
+		return removed.getN();
 	}
 
-
-
-	public List<T> getFiltered(Set<String> tags) {
-		List<T> filteredPlaces = new LinkedList<T>();
-		for (T model : models) {
-			if (containsTag(model, tags)) {
-				filteredPlaces.add(model);
-			}
-		}
+	//TODO implement
+	public Set<T> getFiltered(Set<String> tags) {
+		Set<T> filteredPlaces = new HashSet<T>();
+		//		for(String tag : tags) {
+		//			Query serachQuery = new Query(Criteria.where("tags").)
+		//			try (DBCursor cursor = mongoOperation.find(query, type)) {
+		//				while (cursor.hasNext()) {
+		//					System.out.println(cursor.next());
+		//				}
+		//			}
+		//		}
 		return filteredPlaces;
 	}
 

@@ -12,7 +12,7 @@ public class CommentCreationTO {
 	public CommentCreationTO() {
 	}
 
-	public CommentCreationTO(String comment, Long ownerId,  String targetId) {
+	public CommentCreationTO(String comment, Long ownerId, String targetId) {
 		this.comment = comment;
 		this.ownerId = ownerId;
 		this.targetId = targetId;

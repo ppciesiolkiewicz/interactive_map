@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * Created by krzaczek on 26.10.14.
  */
-public class EventCreationTO implements  Serializable {
+public class EventCreationTO implements Serializable {
 
 	private String placeId;
 	private String name = "";

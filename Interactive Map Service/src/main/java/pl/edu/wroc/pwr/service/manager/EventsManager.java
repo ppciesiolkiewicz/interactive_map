@@ -1,7 +1,15 @@
 package pl.edu.wroc.pwr.service.manager;
 
+import com.mongodb.WriteResult;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import pl.edu.wroc.pwr.model.to.event.EventCreationTO;
 import pl.edu.wroc.pwr.model.to.event.EventTO;
+import pl.edu.wroc.pwr.service.db.SpringMongoConfig;
 import pl.edu.wroc.pwr.service.model.Event;
 
 /**
@@ -9,20 +17,31 @@ import pl.edu.wroc.pwr.service.model.Event;
  */
 public class EventsManager extends ModelManager<Event> {
 
-	public void update(EventTO eventTO, Long ownerId) {
-		Event event = createEventFromTO(eventTO);
+	ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
+	MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
+
+	public EventsManager(Class<Event> type) {
+		super(type);
+	}
+
+	public int update(EventTO eventTO, Long ownerId) {
+		Query searchQuery = new Query(
+			Criteria.where("id").is(eventTO.getId()).andOperator(Criteria.where("ownerId").is(ownerId)));
+		Update update = new Update();
+		update.set("date", eventTO.getDate());
+		update.set("placeId", eventTO.getPlaceId());
+		update.set("ownerId", eventTO.getOwnerId());
+		update.set("tags", eventTO.getTags());
+		update.set("name", eventTO.getName());
+		update.set("description", eventTO.getDescription());
+		WriteResult writeResult = mongoOperation.updateFirst(searchQuery, update, Event.class);
+		return writeResult.getN();
 	}
 
 	public String create(EventCreationTO eventTO) {
 		Event event = createEventFromCreationTO(eventTO);
-		models.add(event);
+		mongoOperation.save(event);
 		return event.getId();
-	}
-
-	private Event createEventFromTO(EventTO eventTO) {
-		Event eventFromCreationTO = createEventFromCreationTO(eventTO);
-		eventFromCreationTO.setId(eventTO.getId());
-		return eventFromCreationTO;
 	}
 
 	private Event createEventFromCreationTO(EventCreationTO eventTO) {

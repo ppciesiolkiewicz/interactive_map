@@ -9,10 +9,8 @@ import org.springframework.data.mongodb.core.query.Query;
 import pl.edu.wroc.pwr.model.to.rating.RateCreationTO;
 import pl.edu.wroc.pwr.service.db.SpringMongoConfig;
 import pl.edu.wroc.pwr.service.manager.utils.RateCalculator;
-import pl.edu.wroc.pwr.service.model.Comment;
 import pl.edu.wroc.pwr.service.model.Rate;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,7 +22,7 @@ public class RateManager {
 	public static final int RATE_MIN = 1;
 	public static final int RATE_MAX = 5;
 
-	ApplicationContext ctx =new AnnotationConfigApplicationContext(SpringMongoConfig.class);
+	ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
 	MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
 
 	private final RateCalculator calculator;
@@ -38,7 +36,8 @@ public class RateManager {
 	}
 
 	public int remove(String rateId, Long ownerId) {
-		Query searchUserQuery = new Query(Criteria.where("id").is(rateId).andOperator(Criteria.where("ownerId").is(ownerId)));
+		Query searchUserQuery = new Query(
+			Criteria.where("id").is(rateId).andOperator(Criteria.where("ownerId").is(ownerId)));
 		WriteResult remove = mongoOperation.remove(searchUserQuery, Rate.class);
 		return remove.getN();
 	}
@@ -56,7 +55,7 @@ public class RateManager {
 		List<Integer> rateValues = new LinkedList<Integer>();
 		Query searchUserQuery = new Query(Criteria.where("targetId").is(targetId));
 		List<Rate> rates = mongoOperation.find(searchUserQuery, Rate.class);
-		for(Rate rate : rates) {
+		for (Rate rate : rates) {
 			rateValues.add(rate.getRate());
 		}
 		return calculator.avg(rateValues);
@@ -74,6 +73,6 @@ public class RateManager {
 		rate.setTargetId(rateCreationTO.getTargetId());
 		return rate;
 	}
-
+	//TODO update
 
 }

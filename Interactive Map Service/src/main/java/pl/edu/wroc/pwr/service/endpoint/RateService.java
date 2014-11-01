@@ -25,22 +25,24 @@ public class RateService {
 	@GET
 	@Path("/target/{id}")
 	public Response getAverage(@PathParam("id") String targetId) {
-		return Response.status(Response.Status.OK).entity(rateManager.getAverage(targetId)).type(MediaType.APPLICATION_JSON)
+		return Response.status(Response.Status.OK).entity(rateManager.getAverage(targetId))
+			.type(MediaType.APPLICATION_JSON)
 			.build();
 	}
-
 
 	@DELETE
 	@Path("/{id}/{ownerId}")
 	public Response removeRate(@PathParam("id") String rateId, @PathParam("ownerId") Long ownerId) {
-		return Response.status(Response.Status.OK).entity(rateManager.remove(rateId, ownerId)).type(MediaType.APPLICATION_JSON)
+		return Response.status(Response.Status.OK).entity(rateManager.remove(rateId, ownerId))
+			.type(MediaType.APPLICATION_JSON)
 			.build();
 	}
 
 	@POST
 	@Path("/")
 	public Response createRate(RateCreationTO rateCreationTO) {
-		return Response.status(Response.Status.OK).entity(rateManager.createRate(rateCreationTO)).type(MediaType.APPLICATION_JSON)
+		return Response.status(Response.Status.OK).entity(rateManager.createRate(rateCreationTO))
+			.type(MediaType.APPLICATION_JSON)
 			.build();
 	}
 }

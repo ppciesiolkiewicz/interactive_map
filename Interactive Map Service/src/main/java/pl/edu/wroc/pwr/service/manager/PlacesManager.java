@@ -1,33 +1,47 @@
 package pl.edu.wroc.pwr.service.manager;
 
+import com.mongodb.WriteResult;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import pl.edu.wroc.pwr.model.to.place.PlaceCreationTO;
 import pl.edu.wroc.pwr.model.to.place.PlaceTO;
+import pl.edu.wroc.pwr.service.db.SpringMongoConfig;
+import pl.edu.wroc.pwr.service.model.Event;
 import pl.edu.wroc.pwr.service.model.Place;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Created by krzaczek on 25.10.14.
  */
-public class PlacesManager extends  ModelManager<Place>{
+public class PlacesManager extends ModelManager<Place> {
 
-	public void update(PlaceTO placeTO, Long ownerId) {
-		Place place = createPlaceFromTO(placeTO);
+	ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
+	MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
+
+	public PlacesManager(Class<Place> type) {
+		super(type);
+	}
+
+	public int update(PlaceTO placeTO, Long ownerId) {
+		Query searchQuery = new Query(
+			Criteria.where("id").is(placeTO.getId()).andOperator(Criteria.where("ownerId").is(ownerId)));
+		Update update = new Update();
+		update.set("ownerId", placeTO.getOwnerId());
+		update.set("tags", placeTO.getTags());
+		update.set("name", placeTO.getName());
+		update.set("description", placeTO.getDescription());
+		update.set("coordinates", placeTO.getCoordinates());
+		WriteResult writeResult = mongoOperation.updateFirst(searchQuery, update, Place.class);
+		return writeResult.getN();
 	}
 
 	public String create(PlaceCreationTO placeTO) {
 		Place place = createPlaceFromCreationTO(placeTO);
-		models.add(place);
+		mongoOperation.save(place);
 		return place.getId();
-	}
-
-	private Place createPlaceFromTO(PlaceTO placeTO) {
-		Place placeFromCreationTO = createPlaceFromCreationTO(placeTO);
-		placeFromCreationTO.setId(placeTO.getId());
-		return placeFromCreationTO;
 	}
 
 	private Place createPlaceFromCreationTO(PlaceCreationTO placeTO) {

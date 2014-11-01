@@ -3,6 +3,7 @@ package pl.edu.wroc.pwr.service.endpoint;
 import pl.edu.wroc.pwr.model.to.place.PlaceCreationTO;
 import pl.edu.wroc.pwr.model.to.place.PlaceTO;
 import pl.edu.wroc.pwr.service.manager.PlacesManager;
+import pl.edu.wroc.pwr.service.model.Place;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -15,7 +16,7 @@ import java.util.Set;
 @Path("/places")
 public class PlacesService {
 
-	private static PlacesManager placesManager = new PlacesManager();
+	private static PlacesManager placesManager = new PlacesManager(Place.class);
 
 	@GET
 	@Path("/")
@@ -42,7 +43,7 @@ public class PlacesService {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/filtered")
-	public Response createPlace(Set<String> tags) {
+	public Response getFilteredPlaces(Set<String> tags) {
 		return Response.status(Response.Status.OK).entity(placesManager.getFiltered(tags)).type(
 			MediaType.APPLICATION_JSON).build();
 	}
@@ -51,15 +52,15 @@ public class PlacesService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/")
 	public Response updatePlace(@QueryParam("ownerId") Long ownerId, PlaceTO place) {
-		placesManager.update(place, ownerId);
-		return Response.status(Response.Status.OK).type(MediaType.APPLICATION_JSON).build();
+		return Response.status(Response.Status.OK).entity(placesManager.update(place, ownerId)).type(
+			MediaType.APPLICATION_JSON).build();
 	}
 
 	@DELETE
 	@Path("/{id}/{ownerId}")
 	public Response removePlace(@PathParam("id") String id, @PathParam("ownerId") Long ownerId) {
-		placesManager.remove(id, ownerId);
-		return Response.status(Response.Status.OK).type(MediaType.APPLICATION_JSON).build();
+		return Response.status(Response.Status.OK).entity(placesManager.remove(id, ownerId)).type(
+			MediaType.APPLICATION_JSON).build();
 	}
 
 }

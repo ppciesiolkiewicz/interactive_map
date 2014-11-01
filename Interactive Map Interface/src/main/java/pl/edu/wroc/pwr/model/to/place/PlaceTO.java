@@ -7,11 +7,12 @@ import java.util.Set;
 /**
  * Created by krzaczek on 26.10.14.
  */
-public class PlaceTO extends  PlaceCreationTO {
+public class PlaceTO extends PlaceCreationTO {
 
 	private String id;
 
-	public PlaceTO() {}
+	public PlaceTO() {
+	}
 
 	public PlaceTO(Coordinates coordinates, String name, String description,
 		Long ownerId, String id, Set<String> tags) {

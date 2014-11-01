@@ -3,11 +3,11 @@ package pl.edu.wroc.pwr.service.endpoint;
 import pl.edu.wroc.pwr.model.to.event.EventCreationTO;
 import pl.edu.wroc.pwr.model.to.event.EventTO;
 import pl.edu.wroc.pwr.service.manager.EventsManager;
+import pl.edu.wroc.pwr.service.model.Event;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.Date;
 import java.util.Set;
 
 /**
@@ -16,7 +16,7 @@ import java.util.Set;
 @Path("/events")
 public class EventsService {
 
-	private static EventsManager eventsManager = new EventsManager();
+	private static EventsManager eventsManager = new EventsManager(Event.class);
 
 	@GET
 	@Path("/")
@@ -43,7 +43,7 @@ public class EventsService {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/filtered")
-	public Response createEvent(Set<String> tags) {
+	public Response getFilteredEvents(Set<String> tags) {
 		return Response.status(Response.Status.OK).entity(eventsManager.getFiltered(tags)).type(
 			MediaType.APPLICATION_JSON).build();
 	}
@@ -52,15 +52,15 @@ public class EventsService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/")
 	public Response updateEvent(@QueryParam("ownerId") Long ownerId, EventTO event) {
-		eventsManager.update(event, ownerId);
-		return Response.status(Response.Status.OK).type(MediaType.APPLICATION_JSON).build();
+		return Response.status(Response.Status.OK).entity(eventsManager.update(event, ownerId))
+			.type(MediaType.APPLICATION_JSON).build();
 	}
 
 	@DELETE
 	@Path("/{id}/{ownerId}")
 	public Response removeEvent(@PathParam("id") String id, @PathParam("ownerId") Long ownerId) {
-		eventsManager.remove(id, ownerId);
-		return Response.status(Response.Status.OK).type(MediaType.APPLICATION_JSON).build();
+		return Response.status(Response.Status.OK).entity(eventsManager.remove(id, ownerId)).type(
+			MediaType.APPLICATION_JSON).build();
 	}
 
 }

@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class CommentManager {
 
-	ApplicationContext ctx =new AnnotationConfigApplicationContext(SpringMongoConfig.class);
+	ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
 	MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
 
 	public Comment get(String commentId) {
@@ -30,7 +30,8 @@ public class CommentManager {
 	}
 
 	public int remove(String commentId, Long ownerId) {
-		Query searchUserQuery = new Query(Criteria.where("id").is(commentId).andOperator(Criteria.where("ownerId").is(ownerId)));
+		Query searchUserQuery = new Query(
+			Criteria.where("id").is(commentId).andOperator(Criteria.where("ownerId").is(ownerId)));
 		WriteResult remove = mongoOperation.remove(searchUserQuery, Comment.class);
 		return remove.getN();
 	}
@@ -46,6 +47,6 @@ public class CommentManager {
 		comment.setOwnerId(commentCreationTO.getOwnerId());
 		comment.setTargetId(commentCreationTO.getTargetId());
 		comment.setComment(commentCreationTO.getComment());
-		return  comment;
+		return comment;
 	}
 }
