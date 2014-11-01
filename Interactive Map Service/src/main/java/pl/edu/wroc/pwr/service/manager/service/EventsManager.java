@@ -1,24 +1,17 @@
-package pl.edu.wroc.pwr.service.manager;
+package pl.edu.wroc.pwr.service.manager.service;
 
 import com.mongodb.WriteResult;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import pl.edu.wroc.pwr.model.to.event.EventCreationTO;
 import pl.edu.wroc.pwr.model.to.event.EventTO;
-import pl.edu.wroc.pwr.service.db.SpringMongoConfig;
 import pl.edu.wroc.pwr.service.model.Event;
 
 /**
  * Created by krzaczek on 26.10.14.
  */
 public class EventsManager extends ModelManager<Event> {
-
-	ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
-	MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
 
 	public EventsManager(Class<Event> type) {
 		super(type);

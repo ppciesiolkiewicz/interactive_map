@@ -1,4 +1,4 @@
-package pl.edu.wroc.pwr.service.manager.utils;
+package pl.edu.wroc.pwr.service.manager.service.utils;
 
 import java.util.List;
 

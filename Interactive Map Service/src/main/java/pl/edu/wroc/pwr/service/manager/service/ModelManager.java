@@ -1,4 +1,4 @@
-package pl.edu.wroc.pwr.service.manager;
+package pl.edu.wroc.pwr.service.manager.service;
 
 import com.mongodb.WriteResult;
 import org.springframework.context.ApplicationContext;
@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import pl.edu.wroc.pwr.service.db.SpringMongoConfig;
+import pl.edu.wroc.pwr.service.manager.DataManager;
 import pl.edu.wroc.pwr.service.model.Model;
 
 import java.util.HashSet;
@@ -16,7 +17,7 @@ import java.util.Set;
 /**
  * Created by krzaczek on 29.10.14.
  */
-public class ModelManager<T extends Model> {
+public class ModelManager<T extends Model>  extends DataManager {
 
 	ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
 	MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");

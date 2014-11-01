@@ -1,4 +1,4 @@
-package pl.edu.wroc.pwr.service.manager;
+package pl.edu.wroc.pwr.service.manager.service;
 
 import com.mongodb.WriteResult;
 import org.springframework.context.ApplicationContext;

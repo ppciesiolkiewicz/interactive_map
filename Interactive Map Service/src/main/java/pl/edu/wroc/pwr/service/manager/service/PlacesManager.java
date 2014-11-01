@@ -1,4 +1,4 @@
-package pl.edu.wroc.pwr.service.manager;
+package pl.edu.wroc.pwr.service.manager.service;
 
 import com.mongodb.WriteResult;
 import org.springframework.context.ApplicationContext;
@@ -10,7 +10,6 @@ import org.springframework.data.mongodb.core.query.Update;
 import pl.edu.wroc.pwr.model.to.place.PlaceCreationTO;
 import pl.edu.wroc.pwr.model.to.place.PlaceTO;
 import pl.edu.wroc.pwr.service.db.SpringMongoConfig;
-import pl.edu.wroc.pwr.service.model.Event;
 import pl.edu.wroc.pwr.service.model.Place;
 
 /**
