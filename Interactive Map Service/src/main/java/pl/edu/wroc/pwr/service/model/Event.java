@@ -1,5 +1,6 @@
 package pl.edu.wroc.pwr.service.model;
 
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -9,11 +10,13 @@ public class Event extends Model {
 
 	private String id = "testEventId";
 	private String placeId;
+	private Date date;
 
 	public Event(String placeId, String name, String description, Long ownerId,
-		Set<String> tags) {
+		Set<String> tags, Date date) {
 		super(name, description, ownerId, tags);
 		this.placeId = placeId;
+		this.date = date;
 	}
 
 	public Event() {
@@ -31,4 +34,11 @@ public class Event extends Model {
 		this.placeId = placeId;
 	}
 
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
 }

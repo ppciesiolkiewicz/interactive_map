@@ -1,6 +1,7 @@
 package pl.edu.wroc.pwr.model.to.event;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -13,17 +14,19 @@ public class EventCreationTO implements  Serializable {
 	private String description = "";
 	private Long ownerId;
 	private Set<String> tags;
+	private Date date;
 
 	public EventCreationTO() {
 	}
 
 	public EventCreationTO(String placeId, String name, String description, Long ownerId,
-		Set<String> tags) {
+		Set<String> tags, Date date) {
 		this.placeId = placeId;
 		this.name = name;
 		this.description = description;
 		this.ownerId = ownerId;
 		this.tags = tags;
+		this.date = date;
 	}
 
 	public String getPlaceId() {
@@ -64,5 +67,13 @@ public class EventCreationTO implements  Serializable {
 
 	public void setTags(Set<String> tags) {
 		this.tags = tags;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 }
