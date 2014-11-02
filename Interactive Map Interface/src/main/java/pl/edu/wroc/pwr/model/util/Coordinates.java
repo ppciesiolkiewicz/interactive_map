@@ -6,8 +6,9 @@ import java.io.Serializable;
  * Created by krzaczek on 25.10.14.
  */
 public class Coordinates implements Serializable {
-	Double longitude;
-	Double latitude;
+
+	private Double longitude;
+	private Double latitude;
 
 	public Coordinates() {
 

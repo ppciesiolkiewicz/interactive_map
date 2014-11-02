@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
 @Path("/rates")
 public class RateService {
 
-	RateManager rateManager = new RateManager();
+	private final RateManager rateManager = new RateManager();
 
 	@GET
 	@Path("/{id}")

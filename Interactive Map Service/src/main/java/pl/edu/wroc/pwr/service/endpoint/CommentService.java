@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 @Path("/comments/")
 public class CommentService {
 
-	private CommentManager commentManager = new CommentManager();
+	private final CommentManager commentManager = new CommentManager();
 
 	@GET
 	@Path("/{id}")

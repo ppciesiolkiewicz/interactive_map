@@ -16,7 +16,7 @@ import java.util.Set;
 @Path("/places")
 public class PlacesService {
 
-	private static PlacesManager placesManager = new PlacesManager(Place.class);
+	private final PlacesManager placesManager = new PlacesManager(Place.class);
 
 	@GET
 	@Path("/")

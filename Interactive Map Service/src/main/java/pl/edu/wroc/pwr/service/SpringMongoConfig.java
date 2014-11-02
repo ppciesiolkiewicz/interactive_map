@@ -1,4 +1,4 @@
-package pl.edu.wroc.pwr.service.db;
+package pl.edu.wroc.pwr.service;
 
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;

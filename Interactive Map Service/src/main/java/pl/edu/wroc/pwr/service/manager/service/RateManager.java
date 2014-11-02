@@ -18,8 +18,8 @@ import java.util.List;
  */
 public class RateManager extends DataManager {
 
-	public static final int RATE_MIN = 1;
-	public static final int RATE_MAX = 5;
+	private static final int RATE_MIN = 1;
+	private static final int RATE_MAX = 5;
 
 	private final RateCalculator calculator;
 
