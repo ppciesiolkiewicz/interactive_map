@@ -16,7 +16,7 @@ public class Place extends Model {
 	public Place() {
 	}
 
-	public Place(Coordinates coordinates, String name, String description, Long ownerId, Set<String> tags) {
+	public Place(Coordinates coordinates, String name, String description, String ownerId, Set<String> tags) {
 		super(name, description, ownerId, tags);
 		this.coordinates = coordinates;
 

@@ -15,7 +15,7 @@ public class PlaceTO extends PlaceCreationTO {
 	}
 
 	public PlaceTO(Coordinates coordinates, String name, String description,
-		Long ownerId, String id, Set<String> tags) {
+		String ownerId, String id, Set<String> tags) {
 		super(coordinates, name, description, ownerId, tags);
 		this.id = id;
 	}

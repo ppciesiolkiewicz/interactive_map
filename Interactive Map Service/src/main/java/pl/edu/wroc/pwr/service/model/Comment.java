@@ -13,12 +13,12 @@ public class Comment {
 	private String id;
 	private String targetId;
 	private String comment;
-	private Long ownerId;
+	private String ownerId;
 
 	public Comment() {
 	}
 
-	public Comment(String comment, Long ownerId, String targetId) {
+	public Comment(String comment, String ownerId, String targetId) {
 		this.comment = comment;
 		this.ownerId = ownerId;
 		this.targetId = targetId;
@@ -40,11 +40,11 @@ public class Comment {
 		this.comment = comment;
 	}
 
-	public Long getOwnerId() {
+	public String getOwnerId() {
 		return ownerId;
 	}
 
-	public void setOwnerId(Long ownerId) {
+	public void setOwnerId(String ownerId) {
 		this.ownerId = ownerId;
 	}
 
