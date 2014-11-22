@@ -13,13 +13,13 @@ public class PlaceCreationTO implements Serializable {
 	private Coordinates coordinates;
 	private String name = "";
 	private String description = "";
-	private Long ownerId;
+	private String ownerId;
 	private Set<String> tags;
 
 	public PlaceCreationTO() {
 	}
 
-	public PlaceCreationTO(Coordinates coordinates, String name, String description, Long ownerId, Set<String> tags) {
+	public PlaceCreationTO(Coordinates coordinates, String name, String description, String ownerId, Set<String> tags) {
 		this.coordinates = coordinates;
 		this.name = name;
 		this.description = description;
@@ -51,11 +51,11 @@ public class PlaceCreationTO implements Serializable {
 		this.description = description;
 	}
 
-	public Long getOwnerId() {
+	public String getOwnerId() {
 		return ownerId;
 	}
 
-	public void setOwnerId(Long ownerId) {
+	public void setOwnerId(String ownerId) {
 		this.ownerId = ownerId;
 	}
 

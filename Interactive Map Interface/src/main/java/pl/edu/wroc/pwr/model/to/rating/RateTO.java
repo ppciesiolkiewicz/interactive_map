@@ -10,7 +10,7 @@ public class RateTO extends  RateCreationTO {
 	public RateTO() {
 	}
 
-	public RateTO(Integer rate, Long ownerId, String targetId, String id) {
+	public RateTO(Integer rate, String ownerId, String targetId, String id) {
 		super(rate, ownerId, targetId);
 		this.id = id;
 	}

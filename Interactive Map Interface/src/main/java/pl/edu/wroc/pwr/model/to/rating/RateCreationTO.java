@@ -6,13 +6,13 @@ package pl.edu.wroc.pwr.model.to.rating;
 public class RateCreationTO {
 
 	private Integer rate;
-	private Long ownerId;
+	private String ownerId;
 	private String targetId;
 
 	public RateCreationTO() {
 	}
 
-	public RateCreationTO(Integer rate, Long ownerId, String targetId) {
+	public RateCreationTO(Integer rate, String ownerId, String targetId) {
 		this.rate = rate;
 		this.ownerId = ownerId;
 		this.targetId = targetId;
@@ -26,11 +26,11 @@ public class RateCreationTO {
 		this.rate = rate;
 	}
 
-	public Long getOwnerId() {
+	public String getOwnerId() {
 		return ownerId;
 	}
 
-	public void setOwnerId(Long ownerId) {
+	public void setOwnerId(String ownerId) {
 		this.ownerId = ownerId;
 	}
 

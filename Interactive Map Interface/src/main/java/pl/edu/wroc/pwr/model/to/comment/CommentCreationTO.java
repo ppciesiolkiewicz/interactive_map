@@ -6,13 +6,13 @@ package pl.edu.wroc.pwr.model.to.comment;
 public class CommentCreationTO {
 
 	private String comment;
-	private Long ownerId;
+	private String ownerId;
 	private String targetId;
 
 	public CommentCreationTO() {
 	}
 
-	public CommentCreationTO(String comment, Long ownerId, String targetId) {
+	public CommentCreationTO(String comment, String ownerId, String targetId) {
 		this.comment = comment;
 		this.ownerId = ownerId;
 		this.targetId = targetId;
@@ -26,11 +26,11 @@ public class CommentCreationTO {
 		this.comment = comment;
 	}
 
-	public Long getOwnerId() {
+	public String getOwnerId() {
 		return ownerId;
 	}
 
-	public void setOwnerId(Long ownerId) {
+	public void setOwnerId(String ownerId) {
 		this.ownerId = ownerId;
 	}
 

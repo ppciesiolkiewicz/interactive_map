@@ -13,7 +13,7 @@ public class EventTO extends EventCreationTO {
 	public EventTO() {
 	}
 
-	public EventTO(String placeId, String name, String description, Long ownerId, Set<String> tags,
+	public EventTO(String placeId, String name, String description, String ownerId, Set<String> tags,
 		String id, Date date) {
 		super(placeId, name, description, ownerId, tags, date);
 		this.id = id;

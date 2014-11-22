@@ -1,9 +1,6 @@
 package pl.edu.wroc.pwr.service;
 
-import pl.edu.wroc.pwr.service.endpoint.CommentService;
-import pl.edu.wroc.pwr.service.endpoint.EventsService;
-import pl.edu.wroc.pwr.service.endpoint.PlacesService;
-import pl.edu.wroc.pwr.service.endpoint.RateService;
+import pl.edu.wroc.pwr.service.endpoint.*;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
@@ -23,6 +20,7 @@ public class MapService extends Application {
 		s.add(EventsService.class);
 		s.add(CommentService.class);
 		s.add(RateService.class);
+		s.add(UserService.class);
 		return s;
 	}
 }

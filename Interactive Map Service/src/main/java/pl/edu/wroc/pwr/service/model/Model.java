@@ -14,10 +14,10 @@ public abstract class Model implements Serializable {
 	private String id;
 	private String name;
 	private String description;
-	private Long ownerId;
+	private String ownerId;
 	private Set<String> tags;
 
-	protected Model(String name, String description, Long ownerId, Set<String> tags) {
+	protected Model(String name, String description, String ownerId, Set<String> tags) {
 		this.name = name;
 		this.description = description;
 		this.ownerId = ownerId;
@@ -51,11 +51,11 @@ public abstract class Model implements Serializable {
 		this.description = description;
 	}
 
-	public Long getOwnerId() {
+	public String getOwnerId() {
 		return ownerId;
 	}
 
-	public void setOwnerId(Long ownerId) {
+	public void setOwnerId(String ownerId) {
 		this.ownerId = ownerId;
 	}
 

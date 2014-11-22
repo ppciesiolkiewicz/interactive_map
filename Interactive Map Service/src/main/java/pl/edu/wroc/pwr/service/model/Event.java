@@ -14,7 +14,7 @@ public class Event extends Model {
 	private String placeId;
 	private Date date;
 
-	public Event(String placeId, String name, String description, Long ownerId,
+	public Event(String placeId, String name, String description, String ownerId,
 		Set<String> tags, Date date) {
 		super(name, description, ownerId, tags);
 		this.placeId = placeId;

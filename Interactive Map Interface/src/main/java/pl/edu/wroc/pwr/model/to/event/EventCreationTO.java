@@ -12,14 +12,14 @@ public class EventCreationTO implements Serializable {
 	private String placeId;
 	private String name = "";
 	private String description = "";
-	private Long ownerId;
+	private String ownerId;
 	private Set<String> tags;
 	private Date date;
 
 	public EventCreationTO() {
 	}
 
-	public EventCreationTO(String placeId, String name, String description, Long ownerId,
+	public EventCreationTO(String placeId, String name, String description, String ownerId,
 		Set<String> tags, Date date) {
 		this.placeId = placeId;
 		this.name = name;
@@ -53,11 +53,11 @@ public class EventCreationTO implements Serializable {
 		this.description = description;
 	}
 
-	public Long getOwnerId() {
+	public String getOwnerId() {
 		return ownerId;
 	}
 
-	public void setOwnerId(Long ownerId) {
+	public void setOwnerId(String ownerId) {
 		this.ownerId = ownerId;
 	}
 

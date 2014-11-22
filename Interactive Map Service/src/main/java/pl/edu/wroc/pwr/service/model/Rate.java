@@ -12,13 +12,13 @@ public class Rate {
 	@Id
 	private String id;
 	private Integer rate;
-	private Long ownerId;
+	private String ownerId;
 	private String targetId;
 
 	public Rate() {
 	}
 
-	public Rate(Integer rate, Long ownerId, String targetId) {
+	public Rate(Integer rate, String ownerId, String targetId) {
 		this.rate = rate;
 		this.ownerId = ownerId;
 		this.targetId = targetId;
@@ -40,11 +40,11 @@ public class Rate {
 		this.rate = rate;
 	}
 
-	public Long getOwnerId() {
+	public String getOwnerId() {
 		return ownerId;
 	}
 
-	public void setOwnerId(Long ownerId) {
+	public void setOwnerId(String ownerId) {
 		this.ownerId = ownerId;
 	}
 
