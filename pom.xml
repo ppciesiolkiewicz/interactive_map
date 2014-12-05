@@ -37,6 +37,11 @@
                 <version>3.0.9.Final</version>
             </dependency>
             <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-multipart-provider</artifactId>
+                <version>3.0.10.Final</version>
+            </dependency>
+            <dependency>
                 <groupId>pl.edu.wroc.pwr</groupId>
                 <artifactId>InteractiveMapInterface</artifactId>
                 <version>${project.version}</version>

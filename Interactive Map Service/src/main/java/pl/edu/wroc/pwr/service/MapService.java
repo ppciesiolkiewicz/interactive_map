@@ -21,6 +21,7 @@ public class MapService extends Application {
 		s.add(CommentService.class);
 		s.add(RateService.class);
 		s.add(UserService.class);
+		s.add(PicturesService.class);
 		return s;
 	}
 }

@@ -1,7 +1,5 @@
 package pl.edu.wroc.pwr.service.endpoint;
 
-import pl.edu.wroc.pwr.model.to.place.PlaceCreationTO;
-import pl.edu.wroc.pwr.model.to.place.PlaceTO;
 import pl.edu.wroc.pwr.model.to.user.UserTO;
 import pl.edu.wroc.pwr.service.manager.service.UserManager;
 
