@@ -3,6 +3,7 @@ package pl.edu.wroc.pwr.service.manager.service.utils;
 import org.apache.commons.io.IOUtils;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
+import pl.edu.wroc.pwr.service.EnvironmentVariables;
 
 import javax.ws.rs.core.MultivaluedMap;
 import java.io.File;
@@ -18,7 +19,8 @@ import java.util.Map;
  */
 public class PictureConverter {
 
-	public static final String UPLOADED_FILE_PATH = "/var/lib/openshift/546b74df4382ec339e00000b/jbossas/standalone/deployments/ROOT.war/images/";
+	public static final String ROOT_WAR_IMAGES = "standalone/deployments/ROOT.war/images/";
+	public static final String UPLOADED_FILE_PATH = EnvironmentVariables.DEPLOYMENTS_PATH + ROOT_WAR_IMAGES;
 
 	public String convertAndSave(MultipartFormDataInput input) {
 

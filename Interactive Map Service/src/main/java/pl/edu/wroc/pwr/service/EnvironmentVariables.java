@@ -10,5 +10,6 @@ public interface EnvironmentVariables {
 	String DB_PASSWORD = System.getenv("OPENSHIFT_MONGODB_DB_PASSWORD");
 	String APP_NAME = System.getenv("OPENSHIFT_APP_NAME");
 	Integer DB_PORT = Integer.valueOf(System.getenv("OPENSHIFT_MONGODB_DB_PORT"));
+	String DEPLOYMENTS_PATH = System.getenv("OPENSHIFT_JBOSSAS_DIR");
 
 }
