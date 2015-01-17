@@ -1,10 +1,13 @@
 package pl.edu.wroc.pwr.service.manager.service;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.mongodb.WriteResult;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import pl.edu.wroc.pwr.service.manager.DataManager;
+import pl.edu.wroc.pwr.service.manager.service.utils.JsonObjectConverter;
 import pl.edu.wroc.pwr.service.manager.service.utils.PictureConverter;
 import pl.edu.wroc.pwr.service.model.Picture;
 
@@ -41,7 +44,7 @@ public class PictureManager extends DataManager {
 		String fileName = pictureConverter.convertAndSave(input);
 		Picture picture = new Picture(ownerId, targetId, fileName);
 		mongoOperation.save(picture);
-		return picture.getId();
+		return new Gson().toJson(JsonObjectConverter.convert("id", picture.getId()));
 	}
 
 }

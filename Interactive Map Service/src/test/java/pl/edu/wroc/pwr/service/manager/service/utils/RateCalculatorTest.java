@@ -1,7 +1,11 @@
 package pl.edu.wroc.pwr.service.manager.service.utils;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import org.junit.Before;
 import org.junit.Test;
+import pl.edu.wroc.pwr.service.model.Place;
 
 import java.util.ArrayList;
 import java.util.List;

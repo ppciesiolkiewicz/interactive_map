@@ -1,10 +1,13 @@
 package pl.edu.wroc.pwr.service.manager.service;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.mongodb.WriteResult;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import pl.edu.wroc.pwr.model.to.comment.CommentCreationTO;
 import pl.edu.wroc.pwr.service.manager.DataManager;
+import pl.edu.wroc.pwr.service.manager.service.utils.JsonObjectConverter;
 import pl.edu.wroc.pwr.service.model.Comment;
 
 import java.util.List;
@@ -30,10 +33,10 @@ public class CommentManager extends DataManager {
 		return remove.getN();
 	}
 
-	public String createComment(CommentCreationTO commentCreationTO) {
+	public String createComgit ment(CommentCreationTO commentCreationTO) {
 		Comment comment = createCommentFromTO(commentCreationTO);
 		mongoOperation.save(comment);
-		return comment.getId();
+		return new Gson().toJson(JsonObjectConverter.convert("id", comment.getId()));
 	}
 
 	private Comment createCommentFromTO(CommentCreationTO commentCreationTO) {

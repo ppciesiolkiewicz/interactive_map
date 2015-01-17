@@ -1,5 +1,7 @@
 package pl.edu.wroc.pwr.service.manager.service;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.mongodb.WriteResult;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -7,6 +9,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import pl.edu.wroc.pwr.model.to.rating.RateCreationTO;
 import pl.edu.wroc.pwr.model.to.rating.RateTO;
 import pl.edu.wroc.pwr.service.manager.DataManager;
+import pl.edu.wroc.pwr.service.manager.service.utils.JsonObjectConverter;
 import pl.edu.wroc.pwr.service.manager.service.utils.RateCalculator;
 import pl.edu.wroc.pwr.service.model.Rate;
 
@@ -33,7 +36,7 @@ public class RateManager extends DataManager {
 
 	public int remove(String rateId, Long ownerId) {
 		Query searchUserQuery = new Query(
-			Criteria.where("id").is(rateId).andOperator(Criteria.where("ownerId").is(ownerId)));
+				Criteria.where("id").is(rateId).andOperator(Criteria.where("ownerId").is(ownerId)));
 		WriteResult remove = mongoOperation.remove(searchUserQuery, Rate.class);
 		return remove.getN();
 	}
@@ -44,7 +47,7 @@ public class RateManager extends DataManager {
 		}
 		Rate rate = createRateFromTO(rateCreationTO);
 		mongoOperation.save(rate);
-		return rate.getId();
+		return new Gson().toJson(JsonObjectConverter.convert("id", rate.getId()));
 	}
 
 	public Double getAverage(String targetId) {
@@ -72,7 +75,7 @@ public class RateManager extends DataManager {
 
 	public int update(Long ownerId, RateTO rateTO) {
 		Query searchQuery = new Query(
-			Criteria.where("id").is(rateTO.getId()).andOperator(Criteria.where("ownerId").is(ownerId)));
+				Criteria.where("id").is(rateTO.getId()).andOperator(Criteria.where("ownerId").is(ownerId)));
 		Update update = new Update();
 		update.set("ownerId", rateTO.getOwnerId());
 		update.set("rate", rateTO.getRate());

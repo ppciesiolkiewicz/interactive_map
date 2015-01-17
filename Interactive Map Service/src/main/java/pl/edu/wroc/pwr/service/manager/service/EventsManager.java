@@ -1,11 +1,14 @@
 package pl.edu.wroc.pwr.service.manager.service;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.mongodb.WriteResult;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import pl.edu.wroc.pwr.model.to.event.EventCreationTO;
 import pl.edu.wroc.pwr.model.to.event.EventTO;
+import pl.edu.wroc.pwr.service.manager.service.utils.JsonObjectConverter;
 import pl.edu.wroc.pwr.service.model.Event;
 
 /**
@@ -34,7 +37,7 @@ public class EventsManager extends ModelManager<Event> {
 	public String create(EventCreationTO eventTO) {
 		Event event = createEventFromCreationTO(eventTO);
 		mongoOperation.save(event);
-		return event.getId();
+		return new Gson().toJson(JsonObjectConverter.convert("id", event.getId()));
 	}
 
 	private Event createEventFromCreationTO(EventCreationTO eventTO) {

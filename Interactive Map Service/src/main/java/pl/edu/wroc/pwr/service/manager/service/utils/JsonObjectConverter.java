@@ -8,7 +8,7 @@ import com.google.gson.JsonObject;
  */
 public class JsonObjectConverter {
 
-	public JsonElement convert(String propertyName, String value) {
+	public static JsonElement convert(String propertyName, String value) {
 		JsonObject object = new JsonObject();
 		object.addProperty(propertyName, value);
 		return object;

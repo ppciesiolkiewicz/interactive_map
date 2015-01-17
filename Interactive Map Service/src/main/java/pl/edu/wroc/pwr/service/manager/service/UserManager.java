@@ -1,11 +1,14 @@
 package pl.edu.wroc.pwr.service.manager.service;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.mongodb.WriteResult;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import pl.edu.wroc.pwr.model.to.user.UserTO;
 import pl.edu.wroc.pwr.service.manager.DataManager;
+import pl.edu.wroc.pwr.service.manager.service.utils.JsonObjectConverter;
 import pl.edu.wroc.pwr.service.model.User;
 
 /**
@@ -20,7 +23,7 @@ public class UserManager extends DataManager {
 	public String create(UserTO userTO) {
 		User user = createUserFromTO(userTO);
 		mongoOperation.save(user);
-		return user.getId();
+		return new Gson().toJson(JsonObjectConverter.convert("id", user.getId()));
 	}
 
 	public int update(UserTO userTO) {

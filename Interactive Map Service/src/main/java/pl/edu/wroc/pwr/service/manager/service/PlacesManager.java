@@ -1,11 +1,14 @@
 package pl.edu.wroc.pwr.service.manager.service;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.mongodb.WriteResult;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import pl.edu.wroc.pwr.model.to.place.PlaceCreationTO;
 import pl.edu.wroc.pwr.model.to.place.PlaceTO;
+import pl.edu.wroc.pwr.service.manager.service.utils.JsonObjectConverter;
 import pl.edu.wroc.pwr.service.model.Place;
 
 /**
@@ -33,7 +36,7 @@ public class PlacesManager extends ModelManager<Place> {
 	public String create(PlaceCreationTO placeTO) {
 		Place place = createPlaceFromCreationTO(placeTO);
 		mongoOperation.save(place);
-		return place.getId();
+		return new Gson().toJson(JsonObjectConverter.convert("id", place.getId()));
 	}
 
 	private Place createPlaceFromCreationTO(PlaceCreationTO placeTO) {
