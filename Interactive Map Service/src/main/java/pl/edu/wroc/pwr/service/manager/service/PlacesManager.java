@@ -36,7 +36,7 @@ public class PlacesManager extends ModelManager<Place> {
 	public String create(PlaceCreationTO placeTO) {
 		Place place = createPlaceFromCreationTO(placeTO);
 		mongoOperation.save(place);
-		return new Gson().toJson(JsonObjectConverter.convert("id", place.getId()));
+		return JsonObjectConverter.convert("id", place.getId());
 	}
 
 	private Place createPlaceFromCreationTO(PlaceCreationTO placeTO) {

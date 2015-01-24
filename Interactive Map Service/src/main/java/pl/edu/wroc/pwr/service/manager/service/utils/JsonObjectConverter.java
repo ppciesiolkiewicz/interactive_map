@@ -1,6 +1,6 @@
 package pl.edu.wroc.pwr.service.manager.service.utils;
 
-import com.google.gson.JsonElement;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 /**
@@ -8,9 +8,9 @@ import com.google.gson.JsonObject;
  */
 public class JsonObjectConverter {
 
-	public static JsonElement convert(String propertyName, String value) {
+	public static String convert(String propertyName, String value) {
 		JsonObject object = new JsonObject();
 		object.addProperty(propertyName, value);
-		return object;
+		return new Gson().toJson(object);
 	}
 }

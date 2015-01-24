@@ -47,7 +47,7 @@ public class RateManager extends DataManager {
 		}
 		Rate rate = createRateFromTO(rateCreationTO);
 		mongoOperation.save(rate);
-		return new Gson().toJson(JsonObjectConverter.convert("id", rate.getId()));
+		return JsonObjectConverter.convert("id", rate.getId());
 	}
 
 	public Double getAverage(String targetId) {

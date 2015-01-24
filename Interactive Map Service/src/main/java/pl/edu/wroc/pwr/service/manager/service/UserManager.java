@@ -23,7 +23,7 @@ public class UserManager extends DataManager {
 	public String create(UserTO userTO) {
 		User user = createUserFromTO(userTO);
 		mongoOperation.save(user);
-		return new Gson().toJson(JsonObjectConverter.convert("id", user.getId()));
+		return JsonObjectConverter.convert("id", user.getId());
 	}
 
 	public int update(UserTO userTO) {

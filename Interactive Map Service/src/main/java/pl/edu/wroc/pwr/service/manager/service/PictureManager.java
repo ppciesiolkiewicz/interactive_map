@@ -44,7 +44,7 @@ public class PictureManager extends DataManager {
 		String fileName = pictureConverter.convertAndSave(input);
 		Picture picture = new Picture(ownerId, targetId, fileName);
 		mongoOperation.save(picture);
-		return new Gson().toJson(JsonObjectConverter.convert("id", picture.getId()));
+		return JsonObjectConverter.convert("id", picture.getId());
 	}
 
 }

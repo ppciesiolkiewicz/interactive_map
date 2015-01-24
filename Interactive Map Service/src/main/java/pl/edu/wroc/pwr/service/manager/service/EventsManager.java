@@ -37,7 +37,7 @@ public class EventsManager extends ModelManager<Event> {
 	public String create(EventCreationTO eventTO) {
 		Event event = createEventFromCreationTO(eventTO);
 		mongoOperation.save(event);
-		return new Gson().toJson(JsonObjectConverter.convert("id", event.getId()));
+		return JsonObjectConverter.convert("id", event.getId());
 	}
 
 	private Event createEventFromCreationTO(EventCreationTO eventTO) {

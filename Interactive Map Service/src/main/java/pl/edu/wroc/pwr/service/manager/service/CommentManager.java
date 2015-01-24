@@ -36,7 +36,7 @@ public class CommentManager extends DataManager {
 	public String createComment(CommentCreationTO commentCreationTO) {
 		Comment comment = createCommentFromTO(commentCreationTO);
 		mongoOperation.save(comment);
-		return new Gson().toJson(JsonObjectConverter.convert("id", comment.getId()));
+		return JsonObjectConverter.convert("id", comment.getId());
 	}
 
 	private Comment createCommentFromTO(CommentCreationTO commentCreationTO) {
