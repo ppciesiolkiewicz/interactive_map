@@ -33,7 +33,7 @@ public class CommentManager extends DataManager {
 		return remove.getN();
 	}
 
-	public String createComgit ment(CommentCreationTO commentCreationTO) {
+	public String createComment(CommentCreationTO commentCreationTO) {
 		Comment comment = createCommentFromTO(commentCreationTO);
 		mongoOperation.save(comment);
 		return new Gson().toJson(JsonObjectConverter.convert("id", comment.getId()));
